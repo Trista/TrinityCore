@@ -1,19 +1,19 @@
 /*
- * Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the
- * Free Software Foundation; either version 2 of the License, or (at your
- * option) any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+* Copyright (C) 2008-2013 TrinityCore <http://www.trinitycore.org/>
+*
+* This program is free software; you can redistribute it and/or modify it
+* under the terms of the GNU General Public License as published by the
+* Free Software Foundation; either version 2 of the License, or (at your
+* option) any later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+* more details.
+*
+* You should have received a copy of the GNU General Public License along
+* with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #ifndef DEF_AZJOL_NERUB_H
 #define DEF_AZJOL_NERUB_H
@@ -25,13 +25,28 @@ enum Data64
     DATA_ANUBARAK,
     DATA_WATCHER_GASHRA,
     DATA_WATCHER_SILTHIK,
-    DATA_WATCHER_NARJIL
+    DATA_WATCHER_NARJIL,
+    DATA_FRONT_DOOR_TRIGGER_A_GUID,
+    DATA_FRONT_DOOR_TRIGGER_B_GUID,
+    DATA_SIDE_DOOR_TRIGGER_GUID
 };
+
 enum Data
 {
     DATA_KRIKTHIR_THE_GATEWATCHER_EVENT,
     DATA_HADRONOX_EVENT,
     DATA_ANUBARAK_EVENT
+};
+
+enum CreatureEntries
+{
+    NPC_HADRONOX                     = 28921,
+    NPC_WORLD_TRIGGER_LARGE_AOI      = 23472
+};
+
+enum InstanceActions
+{
+    ACTION_SUMMON_REINFORCEMENTS       = 1 // Used by Hadronox to start controlling front door triggers
 };
 
 #endif
