@@ -25,6 +25,7 @@ DELETE FROM `creature_addon` WHERE `guid` BETWEEN 127340 AND 127375;
 DELETE FROM `creature_addon` WHERE `guid` BETWEEN 127293 AND 127315;
 DELETE FROM `creature_addon` WHERE `guid` BETWEEN 127272 AND 127292;
 DELETE FROM `creature_addon` WHERE `guid`=12246;
+DELETE FROM `creature_addon` WHERE `guid`=127401;
 
 -- Assign ScriptNames to creature_templates
 UPDATE `creature_template` SET `ScriptName`='npc_anub_ar_crusher' WHERE `entry` IN (28922); -- Anub'Ar Crusher
@@ -91,12 +92,16 @@ UPDATE `creature` SET `orientation`=4.8 WHERE `guid` IN (@GUID1,@GUID2);
 -- Linked respawn - remove linked_respawn of unblizzlike spawned trash
 DELETE FROM `linked_respawn` WHERE `guid` IN (127272,127273,127275,127293,127296,127318,127340,127341,127350,127351,127352,127355,127357,127359,127360,127364,127365,127375,127379,127380);
 
--- Linked respawn - link initial spawned in db first Crusher's group to first boss death in order to bound the id, since Hadronox actions are permanent (and adds won't reset on even rest)
-DELETE FROM `linked_respawn` WHERE `guid` IN (@StaticCrusher,@GUID1,@GUID2);
+-- Linked respawn - link initial spawned in db first Crusher's group to first boss death in order to bound the id,
+-- since Hadronox actions are permanent (and adds won't reset on even rest, also bound triggers).
+DELETE FROM `linked_respawn` WHERE `guid` IN (@StaticCrusher,@GUID1,@GUID2,127376,127377,127378);
 INSERT INTO `linked_respawn` (`guid`,`linkedGuid`,`linkType`) VALUES
 (@GUID1,127214,0),
 (@GUID2,127214,0),
-(@StaticCrusher,127214,0);
+(@StaticCrusher,127214,0),
+(127376,127214,0), -- Large Trigger AOI
+(127377,127214,0), -- -//-
+(127378,127214,0); -- -//-
 
 -- Add all 3 auras to each of the invisible triggers
 DELETE FROM `creature_addon` WHERE `guid` IN (127376,127377,127378);
@@ -111,12 +116,22 @@ UPDATE `creature` SET `orientation`=0.694 WHERE `guid`=127378;
 UPDATE `creature` SET `orientation`=2.202 WHERE `guid`=127376;
 
 -- Creature template addon updates - add missing auras to some trash adds
-DELETE FROM `creature_template_addon` WHERE `entry` IN (@AttackingChampion,@AttackingNecromancer,@AttackingFiend);
+DELETE FROM `creature_template_addon` WHERE `entry` IN (@AttackingChampion,@AttackingNecromancer,@AttackingFiend,29117,29118,29119,29062,29063,29064,29096,29097,29098,@Hadronox);
 INSERT INTO `creature_template_addon` (`entry`, `path_id`, `mount`, `bytes1`, `bytes2`, `emote`, `auras`) VALUES
 -- All these 53255 auras are used to check if event was reseted
-(@AttackingChampion,0,0,0,4097,0, '53255'),
-(@AttackingNecromancer,0,0,0,4097,0, '53255'),
-(@AttackingFiend,0,0,0,4097,0, '53255');
+(@AttackingChampion,0,0,0,1,0, '53255'),
+(@AttackingNecromancer,0,0,0,1,0, '53255'),
+(@AttackingFiend,0,0,0,1,0, '53255'),
+(29117,0,0,0,1,0, ''),
+(29118,0,0,0,1,0, ''),
+(29119,0,0,0,1,0, ''),
+(29063,0,0,0,1,0, ''),
+(29097,0,0,0,1,0, ''),
+(29062,0,0,0,1,0, ''),
+(29096,0,0,0,1,0, ''),
+(29064,0,0,0,1,0, ''),
+(29098,0,0,0,1,0, ''),
+(@Hadronox,0,0,0,1,0, '');
 
 -- Update position - Adjust Hadronox spawning position
 UPDATE `creature` SET `position_x`=515.5848,`position_y`=544.2007,`position_z`=673.6272,`orientation`=5.647 WHERE `guid`=127401;

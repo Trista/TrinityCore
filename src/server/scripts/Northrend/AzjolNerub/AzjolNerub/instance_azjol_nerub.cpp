@@ -21,11 +21,6 @@
 
 #define MAX_ENCOUNTER       3
 
-enum HadronoxPath
-{
-    WP_HADRONOX =       289210
-};
-
 /* Azjol Nerub encounters:
    0 - Krik'thir the Gatewatcher
    1 - Hadronox
@@ -66,6 +61,8 @@ class instance_azjol_nerub : public InstanceMapScript
                 uiWatcherGashra = 0;
                 uiWatcherSilthik = 0;
                 uiWatcherNarjil = 0;
+                frontDoorTriggerAGUID = 0;
+                frontDoorTriggerBGUID = 0;
                 uiKrikthirDoor = 0;
             }
 
@@ -145,16 +142,7 @@ class instance_azjol_nerub : public InstanceMapScript
                             HandleGameObject(uiKrikthirDoor, true);
                         break;
                     case DATA_HADRONOX_EVENT:
-                        if (data == IN_PROGRESS)
-                        {
-                            if (Creature* hadronox = instance->GetCreature(uiHadronox))
-                            {
-                                auiEncounter[1] = data;
-                                hadronox->AI()->SetData(DATA_HADRONOX_EVENT, IN_PROGRESS);
-                                hadronox->AI()->DoAction(ACTION_SUMMON_REINFORCEMENTS);
-                                hadronox->GetMotionMaster()->MovePath(WP_HADRONOX, false);
-                            }
-                        }
+                        auiEncounter[1] = data;
                         break;
                     case DATA_ANUBARAK_EVENT:
                         auiEncounter[2] = data;

@@ -40,13 +40,7 @@ enum Data
 
 enum CreatureEntries
 {
-    NPC_HADRONOX                     = 28921,
     NPC_WORLD_TRIGGER_LARGE_AOI      = 23472
-};
-
-enum InstanceActions
-{
-    ACTION_SUMMON_REINFORCEMENTS       = 1 // Used by Hadronox to start controlling front door triggers
 };
 
 #endif
